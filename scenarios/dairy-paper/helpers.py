@@ -134,6 +134,45 @@ def parse_json_string(json_str: str) -> Dict:
         return json.loads('\n'.join(lines))
 
 
+def normalize_equation(equation: str) -> str:
+    """
+    Normalize an equation string for comparison.
+    
+    Applies the following transformations in order:
+    1. Replace \\mathrm{X} with X (extract content from mathrm)
+    2. Replace \\text{X} with X (extract content from text)
+    3. Replace \\cdot with \\times
+    4. Remove all backslashes
+    5. Remove all spaces
+    
+    Args:
+        equation: LaTeX equation string
+        
+    Returns:
+        Normalized equation string for comparison
+    """
+    normalized = equation
+    
+    # Step 1: Replace \mathrm{X} with X (extract content from mathrm)
+    # Pattern matches \mathrm{...} and extracts the content
+    normalized = re.sub(r'\\mathrm\{([^}]+)\}', r'\1', normalized)
+    
+    # Step 2: Replace \text{X} with X (extract content from text)
+    # Pattern matches \text{...} and extracts the content
+    normalized = re.sub(r'\\text\{([^}]+)\}', r'\1', normalized)
+    
+    # Step 3: Replace \cdot with \times
+    normalized = normalized.replace('\\cdot', '\\times')
+    
+    # Step 4: Remove all backslashes
+    normalized = normalized.replace('\\', '')
+    
+    # Step 5: Remove all spaces
+    normalized = normalized.replace(' ', '')
+    
+    return normalized
+
+
 def extract_equations(json_data: Dict) -> List[str]:
     """
     Extract all equation LaTeX strings from JSON structure.
@@ -155,7 +194,8 @@ def compare_equations_json(json_data1: Dict, json_data2: Dict) -> float:
     """
     Compare two JSON dictionaries and calculate the percentage of extracted equations that exactly match.
     
-    Uses the same approach to check through the JSON structure to find equations.
+    Uses normalized comparison: equations are normalized by removing spaces, backslashes,
+    extracting content from \\mathrm{} and \\text{}, and replacing \\cdot with \\times before comparison.
     
     Args:
         json_data1: First JSON data (ground truth or reference)
@@ -175,17 +215,21 @@ def compare_equations_json(json_data1: Dict, json_data2: Dict) -> float:
     if len(equations2) == 0:
         return 0.0
     
-    # Count exact matches
+    # Normalize all equations for comparison
+    normalized_eq1 = [normalize_equation(eq) for eq in equations1]
+    normalized_eq2 = [normalize_equation(eq) for eq in equations2]
+    
+    # Count exact matches using normalized equations
     # For each equation in json_data2, check if there's an exact match in json_data1
     matched_count = 0
     matched_indices = set()  # Track which equations from json_data1 have been matched
     
-    for eq2 in equations2:
-        for i, eq1 in enumerate(equations1):
+    for eq2_norm in normalized_eq2:
+        for i, eq1_norm in enumerate(normalized_eq1):
             if i in matched_indices:
                 continue  # This equation already matched
-            # Exact string match (case-sensitive, whitespace-sensitive)
-            if eq2 == eq1:
+            # Exact string match after normalization
+            if eq2_norm == eq1_norm:
                 matched_count += 1
                 matched_indices.add(i)
                 break

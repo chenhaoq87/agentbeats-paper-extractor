@@ -3,7 +3,7 @@ name: Run Assessment
 on:
   push:
     paths:
-      - 'scenario.toml'
+      - 'scenarios/dairy-paper/scenario.toml'
   workflow_dispatch:
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     uses: RDI-Foundation/agentbeats-leaderboard-template/.github/workflows/runner.yml@main
     with:
       leaderboard_repo: 'RDI-Foundation/agentbeats-leaderboard-template'
-      scenario_file: 'scenario.toml'
+      scenario_file: 'scenarios/dairy-paper/scenario.toml'
     secrets:
-      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}

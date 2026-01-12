@@ -50,22 +50,22 @@
     "license_type": [
       "CC BY 4.0"
     ],
-    "tdm_allowed": null # TODO: check if this is needed
+    "tdm_allowed": null
   },
   "equations": [
     {
       "equation_id": "eq1",
       "label_in_paper": "[1]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
-      "latex": "N = N_{max} + \\log_{10}\\left( \\frac{e^{\\mu t}}{e^{\\mu t} - 1 + 10^{N_{max} - N_0}} \\right)",
-      "equation_type": "dynamic_growth_model", # TODO: check if this is needed
-      "domain": "microbial_growth_in_cheese", # TODO: check if this is needed
+      "latex": "N = N_{\\max} + \\log_{10}\\left(\\frac{e^{\\mu t}}{e^{\\mu t} - 1 + 10^{N_{\\max} - N_0}}\\right)",
+      "equation_type": "dynamic_growth_model", 
+      "domain": "microbial_growth_in_cheese", 
       "target_quantity": {
         "symbol": "N",
         "name": "C. tyrobutyricum concentration during aging",
         "description": "Concentration of Clostridium tyrobutyricum in Gouda cheese at aging time t",
         "unit": "MPN/kg cheese (often on log10 scale)",
-        "scale": "product_unit" # TODO: check if this is needed
+        "scale": "product_unit"
       },
       "variables": [
         {
@@ -108,23 +108,22 @@
       "model_performance": null,
       "text_context": "In Module (ii), growth of Clostridium tyrobutyricum in Gouda cheese during aging is described by a logistic primary growth equation (Eq. [1]) using time-dependent specific growth rate μ derived from environmental gamma functions for temperature, pH, and water activity.",
       "links": {
-        "figure_ids": [], # notes: probably not needed
+        "figure_ids": [],
         "table_ids": [
           "tbl2",
           "tbl3"
         ],
-        "supplement_ids": [] # notes: probably not needed as it is unavailable
+        "supplement_ids": []
       },
       "explanation": "This equation represents the primary growth model for Clostridium tyrobutyricum in Gouda cheese, capturing how the bacterial concentration increases over aging time toward a maximum population density. It is central to the risk model because it translates environmental conditions (through μ) into actual spore counts that are compared against late blowing defect thresholds.",
       "notes": "N and Nmax are used on a log10 basis in the implementation; the equation is written using an exponential term e^{μt} and a logistic denominator commonly used in predictive microbiology (Zwietering-type model)."
-      # notes: applicability, text_context, explanation, and notes seem to overlap a lot
     },
     {
       "equation_id": "eq2",
       "label_in_paper": "[2]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
       "page": null,
-      "latex": "\\mu = \\gamma(T) \\times \\gamma(\\mathrm{pH}) \\times \\gamma(a_w) \\times \\mu_{max}",
+      "latex": "\\mu = \\gamma(T) \\times \\gamma(\\mathrm{pH}) \\times \\gamma(a_w) \\times \\mu_{\\max}",
       "equation_type": "secondary_growth_model",
       "domain": "microbial_growth_in_cheese",
       "target_quantity": {
@@ -262,7 +261,7 @@
       "label_in_paper": "[3]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
       "page": null,
-      "latex": "\\gamma(T) = \\left( \\frac{T_{aging} - T_{min}}{T_{opt} - T_{min}} \\right)^2",
+      "latex": "\\gamma(T) = \\left(\\frac{T_{\\mathrm{aging}} - T_{\\min}}{T_{\\mathrm{opt}} - T_{\\min}}\\right)^2",
       "equation_type": "gamma_factor_temperature",
       "domain": "microbial_growth_in_cheese",
       "target_quantity": {
@@ -313,7 +312,7 @@
       "label_in_paper": "[4]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
       "page": null,
-      "latex": "\\gamma(\\mathrm{pH}) = \\frac{(\\mathrm{pH}_{aging} - \\mathrm{pH}_{min}) (\\mathrm{pH}_{max} - \\mathrm{pH}_{aging})}{(\\mathrm{pH}_{opt} - \\mathrm{pH}_{min}) (\\mathrm{pH}_{max} - \\mathrm{pH}_{opt})}",
+      "latex": "\\gamma(\\mathrm{pH}) = \\frac{(\\mathrm{pH}_{\\mathrm{aging}} - \\mathrm{pH}_{\\min})(\\mathrm{pH}_{\\max} - \\mathrm{pH}_{\\mathrm{aging}})}{(\\mathrm{pH}_{\\mathrm{opt}} - \\mathrm{pH}_{\\min})(\\mathrm{pH}_{\\max} - \\mathrm{pH}_{\\mathrm{opt}})}",
       "equation_type": "gamma_factor_pH",
       "domain": "microbial_growth_in_cheese",
       "target_quantity": {
@@ -371,7 +370,7 @@
       "label_in_paper": "[5]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
       "page": null,
-      "latex": "\\gamma(a_w) = \\frac{a_{w,aging} - a_{w,min}}{1 - a_{w,min}}",
+      "latex": "\\gamma(a_w) = \\frac{a_{w,\\mathrm{aging}} - a_{w,\\min}}{1 - a_{w,\\min}}",
       "equation_type": "gamma_factor_water_activity",
       "domain": "microbial_growth_in_cheese",
       "target_quantity": {
@@ -415,7 +414,7 @@
       "label_in_paper": "[6]",
       "section": "MATERIALS AND METHODS > Model Overviews > Module (ii)",
       "page": null,
-      "latex": "a_w = 0.995 - 0.00721 \\times \\text{water-phase salt}",
+      "latex": "a_w = 0.995 - 0.00721 \\cdot \\text{water-phase salt}",
       "equation_type": "empirical_relationship",
       "domain": "cheese_physics",
       "target_quantity": {

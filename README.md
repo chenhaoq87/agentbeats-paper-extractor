@@ -20,6 +20,14 @@ This project evaluates agents' ability to extract structured information from sc
 
 - **Scenario**: The complete evaluation setup that runs multiple papers through the evaluation pipeline and aggregates results.
 
+## Sample Outputs
+
+![Sample Output 1](assets/sample_output1.png)
+
+![Sample Output 2](assets/sample_output2.png)
+
+![Sample Output 3](assets/sample_output3.png)
+
 ## Quickstart
 
 ### Prerequisites

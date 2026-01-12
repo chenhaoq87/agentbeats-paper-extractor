@@ -1,0 +1,22 @@
+FROM ghcr.io/astral-sh/uv:python3.12-trixie
+
+RUN adduser agentbeats
+USER agentbeats
+WORKDIR /home/agentbeats/paper-extractor
+
+COPY pyproject.toml uv.lock README.md ./
+
+# Copy src directory for agentbeats module (needed for imports)
+COPY src src
+
+RUN \
+    --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
+    uv sync --locked
+
+# Copy scenarios directory (includes helpers.py and the agent script)
+COPY scenarios scenarios
+
+ENTRYPOINT ["uv", "run", "scenarios/dairy-paper/paper_agent.py"]
+CMD ["--host", "0.0.0.0"]
+EXPOSE 9019
+
