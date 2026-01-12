@@ -122,6 +122,47 @@ uv run agentbeats-run scenarios/dairy-paper/scenario.toml
 
 Or use the A2A client directly to send an assessment request to the green agent.
 
+## Docker Images & Publishing
+
+- Purple agent: `ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-agent:<tag>`
+- Green agent: `ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-evaluator:<tag>`
+  - GitHub Actions publishes `latest` on pushes to `main`, and semantic tags (`1.0.0`, `1`) when you push git tags like `v1.0.0`.
+
+### Build & push automatically (GitHub Actions)
+1. Commit and push to `main`, or create a tag:
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+2. Workflow `.github/workflows/publish.yml` builds for `linux/amd64` and pushes both images to GHCR.
+3. Find images under the repository “Packages” section; adjust visibility there.
+
+### Build locally (optional)
+```bash
+# From repo root
+docker build --platform linux/amd64 -f scenarios/dairy-paper/Dockerfile.paper-agent -t ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-agent:local .
+docker build --platform linux/amd64 -f scenarios/dairy-paper/Dockerfile.paper-evaluator -t ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-evaluator:local .
+```
+
+### Run pulled images
+```bash
+# Purple agent
+docker run --rm -p 9019:9019 \
+  -e OPENAI_API_KEY=your_key \
+  -e PURPLE_MODEL="openai/gpt-4o-mini" \
+  ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-agent:latest \
+  --host 0.0.0.0 --port 9019
+
+# Green agent
+docker run --rm -p 9009:9009 \
+  ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-evaluator:latest \
+  --host 0.0.0.0 --port 9009
+```
+
+### CI secrets
+- `OPENAI_API_KEY` (for assessment workflow)
+- `GHCR_TOKEN` (only if needed; `publish.yml` uses `GITHUB_TOKEN` for GHCR)
+
 ## Project Structure
 
 ```
