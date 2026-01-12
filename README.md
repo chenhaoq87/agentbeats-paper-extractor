@@ -106,10 +106,6 @@ This command will:
 - `--show-logs`: Show detailed agent logs during execution
 - `--serve-only`: Start the agents but don't run the assessment (useful for manual testing)
 
-After running, you should see output similar to:
-
-![Sample output](assets/sample_output.png)
-
 Alternatively, if you've already started the agents manually in separate terminals, you can trigger an assessment using:
 
 ```bash
