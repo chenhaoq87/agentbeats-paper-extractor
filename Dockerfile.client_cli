@@ -3,6 +3,7 @@ RUN adduser --disabled-password agentbeats
 USER agentbeats
 WORKDIR /app
 COPY --chown=agentbeats pyproject.toml uv.lock README.md ./
-RUN --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 uv sync --frozen --no-dev
+RUN --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
+    UV_LINK_MODE=copy uv sync --frozen --no-dev
 COPY --chown=agentbeats src src
 ENTRYPOINT ["uv", "run", "src/agentbeats/client_cli.py"]
