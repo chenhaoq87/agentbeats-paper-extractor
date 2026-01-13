@@ -167,7 +167,7 @@
   "extraction_metadata": {
     "system_name": "dairy-equation-agent",
     "system_version": "0.3.0",
-    "llm_backend": "gpt-4.1-mini",
+        "llm_backend": "gpt-5.2",
     "tools_used": [
       "crossref_api",
       "elsevier_xml_parser"

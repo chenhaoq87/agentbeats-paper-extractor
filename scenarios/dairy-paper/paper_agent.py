@@ -19,7 +19,7 @@ from a2a.utils import new_agent_text_message
 
 load_dotenv()
 
-DEFAULT_MODEL = os.getenv("PURPLE_MODEL", "openai/gpt-4.1-mini")
+DEFAULT_MODEL = os.getenv("PURPLE_MODEL", "openai/gpt-5.2")
 
 SYSTEM_PROMPT = (
     "You are a helpful extraction assistant. Follow the policies and templates provided "

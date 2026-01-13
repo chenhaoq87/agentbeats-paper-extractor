@@ -89,10 +89,10 @@ The purple agent will:
 - `--host`: Host address to bind (default: `127.0.0.1`)
 - `--port`: Port to bind (default: `9019`)
 - `--card-url`: External URL for the agent card (optional)
-- `--agent-llm`: LLM identifier for litellm (default: uses `PURPLE_MODEL` env var or `openai/gpt-4.1-mini`)
+- `--agent-llm`: LLM identifier for litellm (default: uses `PURPLE_MODEL` env var or `openai/gpt-5.2`)
 
 **Environment variables:**
-- `PURPLE_MODEL`: LLM model identifier (e.g., `openai/gpt-4o-mini`, `anthropic/claude-3-haiku`)
+- `PURPLE_MODEL`: LLM model identifier (e.g., `openai/gpt-5.2`, `openai/gpt-5.2-mini`, `anthropic/claude-3.5-haiku`)
 - `OPENAI_API_KEY`: API key for the LLM provider (or set provider-specific keys for litellm)
 
 ### Running the Complete Scenario
@@ -149,7 +149,7 @@ docker build --platform linux/amd64 -f scenarios/dairy-paper/Dockerfile.paper-ev
 # Purple agent
 docker run --rm -p 9019:9019 \
   -e OPENAI_API_KEY=your_key \
-  -e PURPLE_MODEL="openai/gpt-4o-mini" \
+  -e PURPLE_MODEL="openai/gpt-5.2" \
   ghcr.io/chenhaoq87/agentbeats-paper-extractor-paper-agent:latest \
   --host 0.0.0.0 --port 9019
 
