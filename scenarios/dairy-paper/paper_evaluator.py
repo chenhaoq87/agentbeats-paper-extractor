@@ -132,7 +132,7 @@ class PaperEvaluator(GreenAgent):
             os.getenv("TEMPLATES_DIR", str(base_dir / "templates"))
         )
         # Define paper IDs list
-        self.paper_ids = ["001", "002", "003", "004"]
+        self.paper_ids = ["001", "002", "003", "004", "005", "006"]
         # Timeout for participant requests (in seconds, default 5 minutes)
         self.timeout = int(os.getenv("PARTICIPANT_TIMEOUT", "300"))
 

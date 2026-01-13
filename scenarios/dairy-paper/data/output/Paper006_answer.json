@@ -1,0 +1,584 @@
+{
+  "paper": {
+    "doi": "10.3168/jds.2025-26334",
+    "title": "Advancing dairy farm simulations: A 2-step approach for tailored lactation curve estimation and its systemic impacts",
+    "journal": "Journal of Dairy Science",
+    "publisher": "Elsevier",
+    "url": "https://doi.org/10.3168/jds.2025-26334",
+    "year": 2025,
+    "authors": [
+      "Y. Gong",
+      "H. Hu",
+      "K.F. Reed",
+      "V.E. Cabrera"
+    ],
+    "abstract": "Lactation curve models are a foundational component of dairy farm simulation models because they support prediction of individual animal milk production over time. For farm simulation models to be applicable as decision-support tools, the predicted baseline milk production should match farm reported production as accurately as possible. However, individual animal lactation curve parameters are not easily accessible farm data. This study introduces a straightforward and effective calibration method for determining the parameters of Wood's lactation curve, leveraging a previously published database of parameters and 3 additional data inputs readily available on farms: annual herd milk production (AHMP), number of milking cows, and herd parity composition. Our method involves (1) adjusting curve parameters based on previously reported national estimates and farm contextual metadata (i.e., temporal, geographic, and management factors) and (2) further optimizing the scale parameter for each parity to match the 305-d milk yield derived from observed AHMP, number of milking cows, and herd parity composition. The Ruminant Farm Systems (RuFaS) model, a comprehensive dairy farm simulation platform, was employed to evaluate this method on 10 commercial Holstein dairy farms in New York (n = 3), Texas (n = 3), and Wisconsin (n = 4). By using lactation curve parameters estimated by this calibration method, we achieved greater accuracy in estimating AHMP with RuFaS for these case study farms, reducing the root mean square percentage error from 40.6% to 2.22%. To evaluate the downstream effects of lactation curve estimation methods within a farm systems context, we used the RuFaS Animal Module to simulate key performance and environmental metrics, including dry matter intake, enteric methane production, and manure excretion. We calculated gross feed efficiency and associated feed and manure emissions using emission factors derived from established literature. The results underscore the critical role of lactation curve modeling in dairy farm system simulation models and its substantial effects on environmental footprint predictions. In conclusion, this study demonstrates the effectiveness of our lactation curve parameter calibration method. With this method, farm system simulation models such as RuFaS can greatly increase their reliability in generating farm-specific predictions without requiring extensive farm data collection.",
+    "summary": "This paper develops and tests a 2-step method to estimate parity-specific Wood lactation curve parameters for dairy farm simulations, using easily available farm data (annual herd milk production, number of milking cows, and herd parity composition). The calibrated parameters are used in the RuFaS farm model to better match observed annual herd milk production and to assess downstream impacts on intake, gross feed efficiency, manure excretion, and greenhouse gas emissions. The study shows that accurately parameterized lactation curves drastically improve prediction accuracy for annual herd milk production and substantially alter simulated environmental footprint indicators.",
+    "keywords": [
+      "milk production estimation",
+      "farm-specific Wood's curve parameters",
+      "dairy farm simulation",
+      "RuFaS",
+      "optimization"
+    ],
+    "study_year": "2023",
+    "geolocation": [
+      "United States",
+      "New York",
+      "Texas",
+      "Wisconsin"
+    ],
+    "domains": [
+      "milk_yield",
+      "dairy_production",
+      "farm_systems",
+      "environmental_footprint",
+      "feed_efficiency"
+    ],
+    "production_system": [
+      "commercial Hostein dairy farm"
+    ],
+    "species": [
+      "dairy_cow"
+    ],
+    "breed": [
+      "Holstein"
+    ],
+    "dairy_product": [],
+    "microbe_species": [],
+    "license_type": "CC BY",
+    "tdm_allowed": null
+  },
+  "equations": [
+    {
+      "equation_id": "eq1",
+      "label_in_paper": "[1]",
+      "section": "INTRODUCTION",
+      "page": 2,
+      "latex": "y = a \\, t^{b} \\, e^{-c t} + \\varepsilon",
+      "equation_type": "nonlinear_regression",
+      "domain": "lactation_curve",
+      "target_quantity": {
+        "symbol": "y",
+        "name": "daily milk yield",
+        "description": "Observed or predicted milk yield of a cow at a given day in milk (DIM) under the Wood lactation curve model.",
+        "unit": "kg/day",
+        "scale": "individual_animal"
+      },
+      "variables": [
+        {
+          "symbol": "t",
+          "name": "days in milk",
+          "unit": "days"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "a",
+          "name": "scale parameter",
+          "description": "Determines the overall production level of the lactation curve.",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "b",
+          "name": "ascending-phase shape parameter",
+          "description": "Controls the rate of increase in milk yield until peak production.",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "c",
+          "name": "descending-phase shape parameter",
+          "description": "Controls the rate of decline in milk yield after peak production.",
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "\\varepsilon",
+          "name": "random residual",
+          "description": "Normally distributed residual error term representing unexplained variability.",
+          "unit": "kg/day"
+        }
+      ],
+      "applicability": "Standard Wood lactation curve used to model daily milk production dynamics over an entire lactation, forming the mathematical basis for parity-specific parameter calibration in this study.",
+      "model_performance": "Not evaluated independently in this paper; the equation is a standard model form used for parameterization rather than statistical performance testing.",
+      "text_context": "Equation [1] defines the Wood lactation curve, a nonlinear mathematical model describing milk yield as a function of days in milk, with parameters that govern the curve's scale, rise to peak, and decline.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "The equation captures the biologically typical lactation pattern: milk yield rises postpartum (driven by parameter b), reaches a peak, and then declines exponentially (driven by parameter c). Parameter a sets the overall production level.",
+      "notes": "This model form is widely used in dairy science and underlies the calibration method developed later in the paper."
+    }
+    ,
+    {
+      "equation_id": "eq2",
+      "label_in_paper": "[2]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "M305_{\\,herd} = \\frac{AHMP_{observed}}{N_{milking} \\times 365} \\times 305",
+      "equation_type": "algebraic",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "M305_{\\,herd}",
+        "name": "herd-average 305-d milk yield per cow",
+        "description": "Average 305-day milk yield per milking cow in the herd implied by observed annual herd milk production",
+        "unit": "kg/cow per 305 d",
+        "scale": "herd"
+      },
+      "variables": [
+        {
+          "symbol": "AHMP_{observed}",
+          "name": "observed annual herd milk production",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "N_{milking}",
+          "name": "number of milking cows in the herd",
+          "unit": "cows"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Used within the RuFaS model calibration procedure to convert farm-reported annual herd milk production and herd size into an implied 305-d milk yield per cow. Applicable to herds with relatively stable herd size over the year.",
+      "model_performance": "This is a deterministic accounting identity; no separate statistical performance metrics are reported.",
+      "text_context": "Equation [2] defines the herd-average 305-d milk yield, M305_herd, as a function of observed annual herd milk production (AHMP_observed) and the number of milking cows, assuming 365 d per year.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation maps observed annual herd milk production and herd size into an implied 305-d milk yield per cow, which serves as a key calibration target for adjusting Wood lactation curve parameters to be farm-specific.",
+      "notes": "Assumes cows are milking throughout the year and that 305-d yield is proportional to average daily yield derived from annual production."
+    },
+    {
+      "equation_id": "eq3",
+      "label_in_paper": "[3]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "M305_{\\,herd} = M305_{\\,P1} \\times P1\\% + M305_{\\,P2} \\times P2\\% + M305_{\\,P3+} \\times P3^{+}\\%",
+      "equation_type": "algebraic",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "M305_{\\,herd}",
+        "name": "herd-average 305-d milk yield per cow",
+        "description": "Average 305-day milk yield per milking cow in the herd expressed as a parity-weighted combination of parity-specific yields",
+        "unit": "kg/cow per 305 d",
+        "scale": "herd"
+      },
+      "variables": [
+        {
+          "symbol": "M305_{\\,P1}",
+          "name": "305-d milk yield for parity 1 cows",
+          "unit": "kg/cow per 305 d"
+        },
+        {
+          "symbol": "M305_{\\,P2}",
+          "name": "305-d milk yield for parity 2 cows",
+          "unit": "kg/cow per 305 d"
+        },
+        {
+          "symbol": "M305_{\\,P3+}",
+          "name": "305-d milk yield for parity 3 and greater cows",
+          "unit": "kg/cow per 305 d"
+        },
+        {
+          "symbol": "P1\\%",
+          "name": "proportion of parity 1 cows in the milking herd",
+          "unit": "fraction of cows"
+        },
+        {
+          "symbol": "P2\\%",
+          "name": "proportion of parity 2 cows in the milking herd",
+          "unit": "fraction of cows"
+        },
+        {
+          "symbol": "P3^{+}\\%",
+          "name": "proportion of parity 3+ cows in the milking herd",
+          "unit": "fraction of cows"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Used to link parity-specific 305-d yields with overall herd-average 305-d yield when calibrating Wood lactation curve parameters for parities 1, 2, and 3+ in Holstein herds.",
+      "model_performance": "Algebraic decomposition; no specific statistical metrics reported for this identity. It is used inside the optimization of parameter a.",
+      "text_context": "Equation [3] expresses M305_herd as the sum of parity-specific 305-d yields weighted by the herd parity composition (P1%, P2%, P3+%). This connects parity-level Wood curves to the herd-level production target.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": ["Table A3"]
+      },
+      "explanation": "This equation combines parity-specific 305-d yields using the herd’s parity structure, enabling the calibration of parity-specific lactation curves so that their aggregate output matches the herd-average 305-d milk yield implied by farm records.",
+      "notes": "P1%, P2%, and P3+% sum to 1; parity composition is derived from RuFaS demographic simulations or observed herd data."
+    },
+    {
+      "equation_id": "eq4",
+      "label_in_paper": "[4]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "M305_{\\,P2} = M305_{\\,P1} \\times 1.18",
+      "equation_type": "algebraic",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "M305_{\\,P2}",
+        "name": "305-d milk yield for parity 2 cows",
+        "description": "Expected 305-day milk yield of second-parity cows, expressed as 118% of primiparous yield",
+        "unit": "kg/cow per 305 d",
+        "scale": "animal"
+      },
+      "variables": [
+        {
+          "symbol": "M305_{\\,P1}",
+          "name": "305-d milk yield for parity 1 cows",
+          "unit": "kg/cow per 305 d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "1.18",
+          "name": "parity 2 to parity 1 yield ratio",
+          "value": 1.18
+        }
+      ],
+      "applicability": "Used to approximate parity 2 305-d yield from parity 1 yield when direct farm-specific parity 2 yield data are not available. Based on literature-derived ratios for Holstein cows under US conditions.",
+      "model_performance": "No separate performance metrics reported; the 1.18 ratio is taken from prior literature as a fixed scaling factor.",
+      "text_context": "Equation [4] defines M305_P2 as 118% of M305_P1, reflecting typical gains in milk yield from first to second parity reported in national datasets.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "By fixing the parity 2 cows' yield at 118% of primiparous yield, this equation supplies a parity 2 target that, together with parity distribution, enables herd-level calibration of lactation curves.",
+      "notes": "Applies at the parity-average level; does not capture within-parity variability."
+    },
+    {
+      "equation_id": "eq5",
+      "label_in_paper": "[5]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "M305_{\\,P3+} = M305_{\\,P1} \\times 1.25",
+      "equation_type": "algebraic",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "M305_{\\,P3+}",
+        "name": "305-d milk yield for parity 3 and greater cows",
+        "description": "Expected 305-day milk yield of parity 3+ cows, expressed as 125% of primiparous yield",
+        "unit": "kg/cow per 305 d",
+        "scale": "animal"
+      },
+      "variables": [
+        {
+          "symbol": "M305_{\\,P1}",
+          "name": "305-d milk yield for parity 1 cows",
+          "unit": "kg/cow per 305 d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "1.25",
+          "name": "parity 3+ to parity 1 yield ratio",
+          "value": 1.25
+        }
+      ],
+      "applicability": "Used to approximate 305-d yield for cows in parity 3 and above from parity 1 yield, when detailed parity-specific data are not available.",
+      "model_performance": "No performance metrics reported; 1.25 is a literature-based scaling factor.",
+      "text_context": "Equation [5] specifies that M305_P3+ equals 125% of M305_P1, representing typical mature-cow yield relative to primiparous cows.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "By fixing the parity 3+ cows' yield at 125% of primiparous yield, this equation supplies a parity 3+ target that, together with parity distribution, enables herd-level calibration of lactation curves.",
+      "notes": "Assumes a single ratio for all parities ≥3; does not differentiate higher parities separately; does not capture within-parity variability as well."
+    },
+    {
+      "equation_id": "eq6",
+      "label_in_paper": "[6]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "M305 = \\int_{1}^{305} a\\, t^{b} e^{-ct} \\, dt",
+      "equation_type": "integral",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "M305",
+        "name": "305-d milk yield from Wood's lactation curve",
+        "description": "Total milk yield over the first 305 days in milk as implied by a Wood lactation curve with parameters a, b, and c",
+        "unit": "kg/cow per 305 d",
+        "scale": "animal"
+      },
+      "variables": [
+        {
+          "symbol": "t",
+          "name": "days in milk",
+          "unit": "d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "a",
+          "name": "scale parameter for production level",
+          "value": null
+        },
+        {
+          "symbol": "b",
+          "name": "ascending phase parameter",
+          "value": null
+        },
+        {
+          "symbol": "c",
+          "name": "descending phase parameter",
+          "value": null
+        }
+      ],
+      "applicability": "Defines the theoretical 305-d milk yield for an individual cow or parity group whose daily yield follows Wood's lactation function a t^b e^{-ct}. Used in the calibration to link parameter a to the desired 305-d yield for each parity.",
+      "model_performance": "No separate fit statistics for this integral; it is a mathematical transformation of the Wood curve used within the optimization for parameter a.",
+      "text_context": "Equation [6] integrates the Wood lactation curve from day 1 to day 305 to obtain the 305-d milk yield, M305, associated with a given set of parameters (a, b, c).",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation translates Wood’s daily lactation curve into a cumulative 305-d yield, which is the quantity targeted by the calibration procedure to match farm-observed production levels.",
+      "notes": "In practice, RuFaS evaluates the integral numerically by simulating daily milk yield over 305 days."
+    },
+    {
+      "equation_id": "eq7",
+      "label_in_paper": "[7]",
+      "section": "MATERIALS AND METHODS – Parameter Definition",
+      "page": null,
+      "latex": "a^{*} = \\operatorname*{arg\\,min}_{[a_{min}, a_{max}]} \\left| M305_{\\,calculated} - M305_{\\,observed} \\right|",
+      "equation_type": "optimization",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "a^{*}",
+        "name": "optimized Wood curve scale parameter",
+        "description": "Value of the Wood lactation parameter a that minimizes the absolute difference between calculated and observed 305-d milk yield",
+        "unit": "dimensionless",
+        "scale": "animal"
+      },
+      "variables": [
+        {
+          "symbol": "M305_{\\,calculated}",
+          "name": "305-d milk yield calculated from Wood's curve for a candidate a",
+          "unit": "kg/cow per 305 d"
+        },
+        {
+          "symbol": "M305_{\\,observed}",
+          "name": "target 305-d milk yield implied by farm data",
+          "unit": "kg/cow per 305 d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "a_{min}",
+          "name": "lower bound for scale parameter a",
+          "value": "dimensionless"
+        },
+        {
+          "symbol": "a_{max}",
+          "name": "upper bound for scale parameter a",
+          "value": "dimensionless"
+        }
+      ],
+      "applicability": "Core of the calibration step that tailors Wood’s lactation scale parameter a for each parity and farm, given fixed b and c from literature and target 305-d yields derived from AHMP and parity composition.",
+      "model_performance": "Optimization problem; success is reflected indirectly by the low MAPE (2.04%) and RMSPE (2.22%) in annual herd milk production when the calibrated method is used compared to baseline method of high MAPE (23.8%) and RMSPE (40.6%), shown in Table 2.",
+      "text_context": "Equation [7] defines a* as the value of a within specified bounds that minimizes the absolute discrepancy between M305_calculated (from the Wood curve) and M305_observed (from farm-level data).",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [
+          "Table 2"
+        ],
+        "supplement_ids": []
+      },
+      "explanation": "This optimization equation operationalizes the calibration: it finds the scale parameter a that forces the Wood curve to reproduce the 305-d yield implied by farm records, thereby making the simulated lactation curves farm-specific.",
+      "notes": "The optimization is performed by a grid search; Lower and upper bounds of the search range is -20 to +20 relative to the baseline parameter a value."
+    },
+    {
+      "equation_id": "eq8",
+      "label_in_paper": "[8]",
+      "section": "MATERIALS AND METHODS – Impact Assessment with Case Study Farms – Outcome Assessment",
+      "page": null,
+      "latex": "\\%\\,of\\,AHMP_{observed} = \\left( \\frac{AHMP_{simulated}}{AHMP_{observed}} \\right) \\times 100",
+      "equation_type": "algebraic",
+      "domain": "milk_yield",
+      "target_quantity": {
+        "symbol": "\\%\\,of\\,AHMP_{observed}",
+        "name": "percentage of observed annual herd milk production",
+        "description": "Simulated annual herd milk production expressed as a percentage of the observed AHMP",
+        "unit": "%",
+        "scale": "herd"
+      },
+      "variables": [
+        {
+          "symbol": "AHMP_{simulated}",
+          "name": "simulated annual herd milk production",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "AHMP_{observed}",
+          "name": "observed annual herd milk production",
+          "unit": "kg/yr"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Used to summarize and compare how well different parameterization methods (Base vs. Cal) reproduce observed annual herd milk production for the 10 case-study farms.",
+      "model_performance": "Serves as a diagnostic ratio; specific percentages per farm are shown in Figure 2.",
+      "text_context": "Equation [8] computes the ratio of simulated to observed AHMP multiplied by 100 to express model predictions as a percentage of observed production.",
+      "links": {
+        "figure_ids": ["Figure 2"],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation provides an intuitive performance indicator, directly showing how close the simulated annual herd milk production is to the farm-reported production under different lactation curve parameterization methods.",
+      "notes": "A value of 100% indicates perfect agreement between simulated and observed AHMP. Higher the better."
+    },
+    {
+      "equation_id": "eq9",
+      "label_in_paper": "[9]",
+      "section": "MATERIALS AND METHODS – Impact Assessment with Case Study Farms – Outcome Assessment",
+      "page": null,
+      "latex": "GFE = \\frac{FPCM}{DMI}",
+      "equation_type": "algebraic",
+      "domain": "feed_efficiency",
+      "target_quantity": {
+        "symbol": "GFE",
+        "name": "gross feed efficiency",
+        "description": "Gross feed efficiency calculated defined as the ratio of fat- and protein-corrected milk yield to dry matter intake",
+        "unit": "kg milk/kg DMI",
+        "scale": "animal"
+      },
+      "variables": [
+        {
+          "symbol": "FPCM",
+          "name": "fat- and protein-corrected milk yield",
+          "unit": "kg/cow per day"
+        },
+        {
+          "symbol": "DMI",
+          "name": "dry matter intake",
+          "unit": "kg/cow per day"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Calculated from RuFaS outputs to evaluate how lactation curve parameterization influences gross feed efficiency of Holstein cows in the 10 case-study farms.",
+      "model_performance": "Used as an outcome variable; no goodness-of-fit metrics are given for GFE itself, but its changes under Base vs. Cal parameterizations are summarized in Table 3.",
+      "text_context": "Equation [9] defines gross feed efficiency (GFE) as the ratio of fat- and protein-corrected milk (FPCM) to dry matter intake (DMI).",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [
+          "Table 3"
+        ],
+        "supplement_ids": []
+      },
+      "explanation": "This equation condenses production and intake into a single efficiency metric that is sensitive to changes in lactation curve shape and level, making it important for assessing systemic impacts of the calibration on feed use.",
+      "notes": "FPCM is calculated using 3.5% fat, 3.2% crude protein."
+    },
+    {
+      "equation_id": "eq10",
+      "label_in_paper": "[10]",
+      "section": "MATERIALS AND METHODS – Impact Assessment with Case Study Farms – Statistical Analysis",
+      "page": null,
+      "latex": "MAPE = \\frac{1}{n} \\sum_{i=1}^{n} \\left| \\frac{y_{i}^{pred} - y_{i}^{obs}}{y_{i}^{obs}} \\right| \\times 100\\%",
+      "equation_type": "error_metric",
+      "domain": "model_evaluation",
+      "target_quantity": {
+        "symbol": "MAPE",
+        "name": "mean absolute percentage error",
+        "description": "Average absolute percentage difference between predicted and observed annual herd milk production across farms",
+        "unit": "%",
+        "scale": "herd"
+      },
+      "variables": [
+        {
+          "symbol": "y_{i}^{pred}",
+          "name": "predicted annual herd milk production for farm i",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "y_{i}^{obs}",
+          "name": "observed annual herd milk production for farm i",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "n",
+          "name": "number of farms",
+          "unit": "dimensionless"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Used to quantify the average prediction error of AHMP across the 10 farms when using the baseline vs. calibrated lactation curve parameter methods.",
+      "model_performance": "Table 2 reports MAPE of 23.8% for the Base method and 2.04% for the Cal method, demonstrating a large improvement in prediction accuracy with calibration.",
+      "text_context": "Equation [10] defines MAPE as the mean of the absolute relative errors between predicted and observed annual herd milk production, multiplied by 100 to express it as a percentage.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [
+          "Table 2"
+        ],
+        "supplement_ids": []
+      },
+      "explanation": "This error metric summarizes how closely the predicted annual milk production matches the observed production across farms, providing a clear quantitative comparison of the baseline and calibrated parameterization methods.",
+      "notes": "Because the sample size is small (10 farms), each farm contributes substantially to the overall MAPE."
+    },
+    {
+      "equation_id": "eq11",
+      "label_in_paper": "[11]",
+      "section": "MATERIALS AND METHODS – Impact Assessment with Case Study Farms – Statistical Analysis",
+      "page": null,
+      "latex": "RMSPE = \\sqrt{ \\frac{1}{n} \\sum_{i=1}^{n} \\left( \\frac{y_{i}^{pred} - y_{i}^{obs}}{y_{i}^{obs}} \\right)^{2} } \\times 100\\%",
+      "equation_type": "error_metric",
+      "domain": "model_evaluation",
+      "target_quantity": {
+        "symbol": "RMSPE",
+        "name": "root mean square percentage error",
+        "description": "Square root of the mean of squared percentage errors between predicted and observed annual herd milk production across farms",
+        "unit": "%",
+        "scale": "herd"
+      },
+      "variables": [
+        {
+          "symbol": "y_{i}^{pred}",
+          "name": "predicted annual herd milk production for farm i",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "y_{i}^{obs}",
+          "name": "observed annual herd milk production for farm i",
+          "unit": "kg/yr"
+        },
+        {
+          "symbol": "n",
+          "name": "number of farms",
+          "unit": "dimensionless"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Complementary to MAPE, RMSPE is used to assess the dispersion of percentage errors in AHMP predictions under the Base vs. Cal methods.",
+      "model_performance": "Table 2 reports RMSPE of 40.6% for the Base method and 2.22% for the Cal method, indicating a drastic reduction in both magnitude and variability of prediction errors when using the calibrated parameters.",
+      "text_context": "Equation [11] defines RMSPE as the square root of the mean squared relative errors between predicted and observed annual herd milk production, scaled to a percentage.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [
+          "Table 2"
+        ],
+        "supplement_ids": []
+      },
+      "explanation": "RMSPE emphasizes larger errors more than MAPE and thus captures both bias and variability in AHMP predictions, offering a stringent test of how well the calibrated lactation curves reproduce farm-level production.",
+      "notes": "Because it squares the relative errors, RMSPE is more sensitive to outlier farms with large prediction errors."
+    }
+  ],
+  "extraction_metadata": {
+    "system_name": "dairy-equation-agent",
+    "system_version": "0.3.0",
+    "llm_backend": "gpt-5.1",
+    "tools_used": [
+      "elsevier_xml_parser"
+    ],
+    "input_doi": "10.3168/jds.2025-26334",
+    "instruction": "\nYou are an expert in dairy science and mathematical modeling. Extract structured information about equations from the provided JSON data and format it according to the template structure.\n\nExtract all equations with their details (variables, parameters, performance metrics, etc.) and paper metadata. Populate all fields according to the template structure.\n\nCRITICAL: Return ONLY valid JSON matching the template structure. No markdown, explanations, or text outside the JSON.\n",
+    "task_id": "task-2025-12-05-001",
+    "processing_time_seconds": 73.92285895347595,
+    "status": "success",
+    "warnings": [
+      "Exact numerical values for Wood parameters a, b, c are not provided in the excerpt and are left as null."
+    ],
+    "input_file": "XML_chunker\\Benchmark chunked outputs\\select6\\10.3168_jds.2025-26334_general_dairy_results.json",
+    "timestamp_utc": "2025-12-05T00:22:54.272897+00:00"
+  }
+}

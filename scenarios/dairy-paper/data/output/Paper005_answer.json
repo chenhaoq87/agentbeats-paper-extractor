@@ -1,0 +1,437 @@
+{
+  "paper": {
+    "doi": "10.3168/jds.2021-20806",
+    "title": "Comparison of Molly and Karoline models to predict methane production in growing and dairy cattle",
+    "journal": "Journal of Dairy Science",
+    "publisher": "Elsevier",
+    "url": "https://doi.org/10.3168/jds.2021-20806",
+    "year": 2022,
+    "authors": [
+      "M. Kass",
+      "M. Ramin",
+      "M. D. Hanigan",
+      "P. Huhtanen"
+    ],
+    "abstract": "Numerous empirical and mechanistic models predicting methane (CH 4 ) production are available. The aim of this work was to evaluate the Molly cow model and the Nordic cow model Karoline in predicting CH 4  production in cattle using a data set consisting of 267 treatment means from 55 respiration chamber studies. The dietary and animal characteristics used for the model evaluation represent the range of diets fed to dairy and growing cattle. Feedlot diets and diets containing additives mitigating CH 4  production were not included in the data set. The relationships between observed and predicted CH 4  (pCH 4 ) were assessed by regression analysis using fixed and mixed model analysis. Residual analysis was conducted to evaluate which dietary factors were related to prediction errors. The fixed model analysis showed that the Molly predictions were related to the observed data (± standard error) as CH 4  (g/d) = 0.94 (±0.022) × pCH 4  (g/d) + 31 (±6.9) [root mean squared prediction error (RMSPE) = 45.0 g/d (14.9% of observed mean), concordance correlation coefficient (CCC) = 0.925]. The corresponding equation for the Karoline model was CH 4  (g/d) = CH 4  (g/d) = 0.98 (±0.019) × pCH 4  (g/d) + 7.0 (±6.0) [RMSPE = 35.0 g/d (11.6%), CCC = 0.953]. Proportions of mean squared prediction error attributable to mean and linear bias and random error were 10.6, 2.2, and 87.2% for the Molly model, and 1.3, 0.3, and 98.6% for the Karoline model, respectively. Mean and linear bias were significant for the Molly model but not for the Karoline model. With the mixed model regression analysis RMSPE adjusted for random study effects were 10.9 and 7.9% for the Molly model and the Karoline model, respectively. The residuals of CH 4  predictions were more strongly related to factors associated with CH 4  production (feeding level, digestibility, fat concentrations) with the Molly model compared with the Karoline model. Especially large mean (underprediction) and linear bias (overprediction of low digestibility diets relative to high digestibility diets) contributed to the prediction error of CH 4  yield with the Molly model. It was concluded that both models could be used for prediction of CH 4  production in cattle, but Karoline was more accurate and precise based on smaller RMSPE, mean bias, and slope bias, and greater CCC. The importance of accurate input data of key variables affecting diet digestibility is emphasized.",
+    "summary": "This paper evaluates the predictive performance of 2 mechanistic rumen models, Molly and Karoline, for methane (CH4) production in growing and dairy cattle. Using 267 treatment means from 55 respiration chamber studies, the authors regress observed CH4 production on model-predicted CH4 (pCH4) and organic matter digestibility (pOMD). Several linear regression equations relate observed CH4 or OMD to the corresponding model predictions for each model, with reported RMSPE and percentage of observed mean to quantify accuracy. A generic mixed-effects regression equation describes how observed responses are related to predictions with fixed and random components. An RMSPE equation defines the goodness-of-fit metric used. Overall, Karoline yields smaller RMSPE and bias than Molly, indicating better agreement with observed methane production and digestibility across diverse dairy and growing cattle diets without CH4-mitigating additives.",
+    "keywords": [
+      "dynamic model",
+      "methane production",
+      "prediction equation",
+      "cattle"
+    ],
+    "study_year": "1964 to 2015",
+    "geolocation": [],
+    "domains": [
+      "enteric_methane",
+      "digestibility",
+      "dairy_production"
+    ],
+    "production_system": [],
+    "species": [
+      "dairy_cow",
+      "beef_cattle"
+    ],
+    "breed": [],
+    "dairy_product": [],
+    "microbe_species": [],
+    "license_type": "CC BY",
+    "tdm_allowed": null
+  },
+  "equations": [
+    {
+      "equation_id": "formula10",
+      "label_in_paper": null,
+      "section": "MATERIALS AND METHODS > Statistical Analysis",
+      "page": 3051,
+      "latex": "RMSPE = \\sqrt{\\sum (\\text{observed} - \\text{predicted})^2 / n}",
+      "equation_type": "error_metric",
+      "domain": "statistical_error_metric",
+      "target_quantity": {
+        "symbol": "RMSPE",
+        "name": "root mean squared prediction error",
+        "description": "Global measure of prediction error between observed and model-predicted values",
+        "unit": "same as target variable (e.g., g/d for CH_4, g/kg for OMD)",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "observed",
+          "name": "observed value",
+          "unit": "same as target variable"
+        },
+        {
+          "symbol": "predicted",
+          "name": "model-predicted value",
+          "unit": "same as target variable"
+        },
+        {
+          "symbol": "n",
+          "name": "number of observations",
+          "unit": "count"
+        }
+      ],
+      "parameters": [],
+      "applicability": "Used to summarize prediction error for various response variables, notably methane production (g/d) and organic matter digestibility (g/kg), across 267 treatment means from 55 respiration chamber studies. Applies to both growing and dairy cattle and to predictions from the Molly and Karoline models.",
+      "model_performance": "Reported RMSPE values for CH4 predictions include 45.0 g/d (14.9% of observed mean) for Molly, 35.0 g/d (11.6% of observed mean) for Karoline model. With the mixed model regression analysis RMSPE adjusted for random study effects were 10.9% and 7.9% for the Molly model and the Karoline model, respectively. For OMD, RMSPE values of 19.7 (2.7% of mean) for Karoline and 51.9 (7.0% of mean) for Molly are given.",
+      "text_context": "RMSPE = √[Σ (observed − predicted) 2 /n]. This equation defines the root mean squared prediction error used to quantify the discrepancy between observed and predicted values from the Molly and Karoline models.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation defines RMSPE, the central goodness-of-fit criterion used in the paper to compare how well the Molly and Karoline models reproduce observed methane production and digestibility. It aggregates squared residuals between observed and predicted values across treatment means, allowing direct comparison of model accuracy on a common scale.",
+      "notes": "Generic error metric; used for multiple output variables, not only methane."
+    },
+    {
+      "equation_id": "eq1",
+      "label_in_paper": "[1]",
+      "section": "MATERIALS AND METHODS > Statistical Analysis",
+      "page": 3051,
+      "latex": "Y_{ij} = B_0 + B_1 X_{1ij} + b_0 + b_1 X_{1ij} + e_{ij}",
+      "equation_type": "linear_mixed_effects_regression",
+      "domain": "linear_mixed_effects_regression",
+      "target_quantity": {
+        "symbol": "Y_{ij}",
+        "name": "observed response",
+        "description": "Observed value of a response variable (e.g., methane production or digestibility) for treatment i in study j",
+        "unit": "e.g., g/d for CH_4, g/kg for OMD",
+        "scale": "treatment_mean_within_study"
+      },
+      "variables": [
+        {
+          "symbol": "X_{1ij}",
+          "name": "Independent variable",
+          "unit": "same as Y_{ij}"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "B_0",
+          "name": "fixed effect (intercept)",
+          "value": null
+        },
+        {
+          "symbol": "B_1",
+          "name": "fixed effect (slope for X_{1ij})",
+          "value": null
+        },
+        {
+          "symbol": "b_0",
+          "name": "random effect (intercept) of study",
+          "value": null
+        },
+        {
+          "symbol": "b_1",
+          "name": "random effect (slope for of X_{1ij}) of study",
+          "value": null
+        },
+        {
+          "symbol": "e_ij",
+          "name": "random study effect",
+          "value": null
+        }
+      ],
+      "applicability": "Represents the mixed-effects regression structure used to relate observed responses (e.g., observed CH4 production) to predictors such as model-predicted CH4 (pCH4), accounting for random study effects in the 55 respiration chamber experiments.",
+      "model_performance": "Using this mixed model structure, RMSPE adjusted for random study effects were reported as 10.9% for the Molly model and 7.9% for the Karoline model with respect to methane production.",
+      "text_context": "[1] Y ij = B 0 + B 1 X 1ij + b 0 + b 1 X 1ij + e ij , presented in the Statistical Analysis section to describe the mixed model used to regress observed responses on predicted values with both fixed and random effects.",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This mixed-effects regression equation formalizes how the authors compare observed methane production or digestibility to predictions from the Molly and Karoline models. Fixed effects quantify overall bias and scaling, while random intercepts and slopes account for between-study differences, yielding more robust estimates of model performance across heterogeneous experiments.",
+      "notes": "The paper applies this structure with Y as observed CH4 or digestibility and X1ij typically as pCH4 or pOMD from each model; specific parameter estimates are reported in text or tables rather than in this generic form."
+    },
+    {
+      "equation_id": "formula20",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3052,
+      "latex": "CH_4\\,(\\text{g/d}) = 0.94\\,(\\mathrm{SE}\\;\\pm 0.022) \\times pCH_4\\,(\\text{g/d}) + 31\\,(\\pm 6.9)",
+      "equation_type": "fixed_model_regression",
+      "domain": "enteric_methane",
+      "target_quantity": {
+        "symbol": "CH_4",
+        "name": "observed methane production",
+        "description": "Observed daily methane production in respiration chambers",
+        "unit": "g/d",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pCH_4",
+          "name": "Molly-predicted methane production",
+          "unit": "g/d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 31.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pCH4",
+          "value": 0.94
+        }
+      ],
+      "applicability": "Fixed-effects regression relating observed CH4 production to Molly model predictions across 267 treatment means from 55 studies. Includes both growing and dairy cattle on non-feedlot diets without CH4-mitigating additives.",
+      "model_performance": "RMSPE = 45.0 g/d (14.9% of observed mean); concordance correlation coefficient (CCC) = 0.925. Proportions of mean squared prediction error attributable to mean bias, linear bias, and random error were 10.6%, 2.2%, and 87.2%, respectively.",
+      "text_context": "The fixed model analysis showed that the Molly predictions were related to the observed data (± standard error) as CH 4 (g/d) = 0.94 (SE ± 0.022) × pCH 4 (g/d) + 31 (±6.9) with RMSPE = 45.0 g/d (14.9% of observed mean), CCC = 0.925.",
+      "links": {
+        "figure_ids": ["Figure 1"],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This regression quantifies the overall agreement between observed methane production and predictions from the Molly model. The slope near 1 and positive intercept indicate modest bias, while the relatively large RMSPE and notable mean and linear bias components highlight limitations of Molly when applied across the diverse data set.",
+      "notes": "Represents the main fixed-effects evaluation of Molly for CH4; parameters are accompanied by standard errors in the text but only point estimates are recorded here."
+    },
+    {
+      "equation_id": "formula30",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3053,
+      "latex": "CH_4\\,(\\text{g/d}) = 0.98\\,(\\pm 0.019) \\times pCH_4\\,(\\text{g/d}) + 7.0\\,(\\pm 6.0)",
+      "equation_type": "fixed_model_regression",
+      "domain": "enteric_methane",
+      "target_quantity": {
+        "symbol": "CH_4",
+        "name": "observed methane production",
+        "description": "Observed daily methane production in respiration chambers",
+        "unit": "g/d",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pCH_4",
+          "name": "Karoline-predicted methane production",
+          "unit": "g/d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 7.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pCH4",
+          "value": 0.98
+        }
+      ],
+      "applicability": "Fixed-effects regression relating observed CH4 production to Karoline model predictions over the same 267 treatment means from 55 respiration chamber studies covering growing and dairy cattle.",
+      "model_performance": "RMSPE = 35.0 g/d (11.6% of observed mean); concordance correlation coefficient (CCC) = 0.953. Proportions of mean squared prediction error attributable to mean bias, linear bias, and random error were 1.3%, 0.3%, and 98.6%, respectively.",
+      "text_context": "The corresponding equation for the Karoline model was CH 4 (g/d) = 0.98 (±0.019) × pCH 4 (g/d) + 7.0 (±6.0) with RMSPE = 35.0 g/d (11.6% of observed mean), CCC = 0.953.",
+      "links": {
+        "figure_ids": ["Figure 2"],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This fixed-effects regression measures how closely Karoline’s predicted methane production matches chamber observations. The slope very close to 1, small intercept, and lower RMSPE relative to Molly indicate that Karoline reproduces observed CH4 more accurately and with less systematic bias across the compiled data set.",
+      "notes": "Key comparative equation showing Karoline’s superior fixed-effects performance for CH4 relative to Molly."
+    },
+    {
+      "equation_id": "formula50",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3053,
+      "latex": "CH_4\\,(\\text{g/d}) = 0.88\\,(\\pm 0.027) \\times pCH_4\\,(\\text{g/d}) + 42\\,(\\pm 9.7)",
+      "equation_type": "mixed_model_regression",
+      "domain": "enteric_methane",
+      "target_quantity": {
+        "symbol": "CH_4",
+        "name": "observed methane production",
+        "description": "Observed daily methane production in respiration chambers",
+        "unit": "g/d",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pCH_4",
+          "name": "Karoline-predicted methane production (mixed model context)",
+          "unit": "g/d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 42.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pCH4",
+          "value": 0.88
+        }
+      ],
+      "applicability": "Regression of observed CH4 on Karoline predictions reported in the context of model performance statistics (under mixed-effects analysis) for the full data set of 267 observations.",
+      "model_performance": "RMSPE = 24.0 g/d; 7.9% of observed mean, indicating improved precision when random study effects are accounted for.",
+      "text_context": "Karoline: CH 4 (g/d) = 0.88 (±0.027) × pCH 4 (g/d) + 42 (±9.7) (RMSPE = 24.0 g/d; 7.9% of observed mean).",
+      "links": {
+        "figure_ids": ["Figure 2"],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation provides a detailed regression of observed methane on Karoline-predicted values with mixed model analysis, associated with a lower RMSPE and percentage error compared to fixed model regression. It highlights Karoline’s strong predictive performance once between-study variability is modeled explicitly.",
+      "notes": "The text associates this equation with Karoline under mixed model analysis; the slightly lower slope (0.88) with higher intercept suggests some scale and offset bias even though overall error is relatively small."
+    },
+    {
+      "equation_id": "formula40",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3053,
+      "latex": "CH_4\\,(\\text{g/d}) = 0.84\\,(\\pm 0.313) \\times pCH_4\\,(\\text{g/d}) + 62\\,(\\pm 10.5)",
+      "equation_type": "mixed_model_regression",
+      "domain": "enteric_methane",
+      "target_quantity": {
+        "symbol": "CH_4",
+        "name": "observed methane production",
+        "description": "Observed daily methane production in respiration chambers",
+        "unit": "g/d",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pCH_4",
+          "name": "Molly-predicted methane production (mixed model context)",
+          "unit": "g/d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 62.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pCH4",
+          "value": 0.84
+        }
+      ],
+      "applicability": "Regression of observed CH4 on Karoline predictions reported in the context of model performance statistics (under mixed-effects analysis) for the full data set of 267 observations.",
+      "model_performance": "RMSPE = 33.1 g/d; 10.9% of observed mean, indicating larger prediction error than the corresponding Karoline regression.",
+      "text_context": "Molly: CH 4 (g/d) = 0.84 (±0.313) × pCH 4 (g/d) + 62 (±10.5) (RMSPE = 33.1 g/d; 10.9% of observed mean).",
+      "links": {
+        "figure_ids": ["Figure 1"],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This regression represents another evaluation of Molly-predicted methane versus observed values, with mixed model analysis. Thex mixed model anaylsis resulted in better performance than fixed model anaylysis. But the combination of a slope notably less than 1, a relatively large positive intercept, and higher RMSPE compared with Karoline underscores Molly’s tendency toward systematic bias and lower precision.",
+      "notes": "The text associates this equation with Molly under mixed model analysis; reported RMSPE (33.1 g/d; 10.9% of observed mean) is larger than Karoline, indicating slightly worse performance in the prediction than Karoline's model."
+    },
+    {
+      "equation_id": "formula70",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3053,
+      "latex": "OMD\\,(\\text{g/kg}) = 0.79\\,(\\pm 0.045) \\times pOMD\\,(\\text{g/d}) + 150\\,(\\pm 33.4)",
+      "equation_type": "regression",
+      "domain": "digestibility",
+      "target_quantity": {
+        "symbol": "OMD",
+        "name": "observed organic matter digestibility",
+        "description": "Observed organic matter digestibility expressed per kg of dry matter intake",
+        "unit": "g/kg",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pOMD",
+          "name": "Karoline-predicted organic matter digestibility",
+          "unit": "g/d"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 150.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pOMD",
+          "value": 0.79
+        }
+      ],
+      "applicability": "Relates observed organic matter digestibility to Karoline-predicted OMD for the same 267 diet treatments used in methane evaluation.",
+      "model_performance": "RMSPE = 19.7; 2.7% of observed mean, CCC = 0.9, indicating high accuracy of Karoline’s predictions for OMD.",
+      "text_context": "Karoline: OMD (g/kg) = 0.79(±0.045) × pOMD (g/d) + 150 (±33.4) (RMSPE = 19.7; 2.7% of observed mean).",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This equation assesses how well Karoline predicts organic matter digestibility. The relatively high slope (0.79) and modest intercept (150), combined with very low RMSPE relative to the mean, indicate that Karoline captures digestibility patterns across diets with good fidelity, which is crucial because digestibility is a key driver of methane production.",
+      "notes": "The formula text notes pOMD (g/d), but context indicates both OMD and pOMD should be in g/kg; that unit is adopted here, might be a typo in the original text."
+    },
+    {
+      "equation_id": "formula60",
+      "label_in_paper": null,
+      "section": "RESULTS > Predictions of CH4 Production and Digestibility by the Karoline and Molly Models",
+      "page": 3053,
+      "latex": "OMD\\,(\\text{g/kg}) = 0.39\\,(\\pm 0.064) \\times pOMD\\,(\\text{g/kg}) + 460\\,(\\pm 45.0)",
+      "equation_type": "regression",
+      "domain": "digestibility",
+      "target_quantity": {
+        "symbol": "OMD",
+        "name": "observed organic matter digestibility",
+        "description": "Observed organic matter digestibility expressed per kg of dry matter intake",
+        "unit": "g/kg",
+        "scale": "treatment_mean"
+      },
+      "variables": [
+        {
+          "symbol": "pOMD",
+          "name": "Molly-predicted organic matter digestibility",
+          "unit": "g/kg"
+        }
+      ],
+      "parameters": [
+        {
+          "symbol": "intercept",
+          "name": "intercept",
+          "value": 460.0
+        },
+        {
+          "symbol": "slope",
+          "name": "slope on pOMD",
+          "value": 0.39
+        }
+      ],
+      "applicability": "Regression of observed OMD on Molly-predicted OMD across the same respiration chamber data set used for CH4 model evaluation.",
+      "model_performance": "RMSPE = 51.9; 7.0% of observed mean, CCC = 0.32, indicating less accurate OMD prediction by Molly than by Karoline.",
+      "text_context": "Molly: OMD (g/kg) = 0.39 (±0.064) × pOMD (g/kg) + 460 (±45.0.0) (RMSPE = 51.9; 7.0% of observed mean).",
+      "links": {
+        "figure_ids": [],
+        "table_ids": [],
+        "supplement_ids": []
+      },
+      "explanation": "This regression quantifies Molly’s ability to predict organic matter digestibility. The low slope and high intercept, together with a higher RMSPE than Karoline’s OMD regression, suggest systematic bias and weaker capture of digestibility, which likely contributes to Molly’s poorer methane predictions.",
+      "notes": "The raw text includes a formatting anomaly (45.0.0); it is interpreted here as 45.0."
+    }
+  ],
+  "extraction_metadata": {
+    "system_name": "dairy-equation-agent",
+    "system_version": "0.3.0",
+    "llm_backend": "gpt-5.1",
+    "tools_used": [
+      "elsevier_xml_parser"
+    ],
+    "input_doi": "10.3168/jds.2021-20806",
+    "instruction": "\nYou are an expert in dairy science and mathematical modeling. Extract structured information about equations from the provided JSON data and format it according to the template structure.\n\nExtract all equations with their details (variables, parameters, performance metrics, etc.) and paper metadata. Populate all fields according to the template structure.\n\nCRITICAL: Return ONLY valid JSON matching the template structure. No markdown, explanations, or text outside the JSON.\n",
+    "task_id": "task-2025-12-05-auto",
+    "processing_time_seconds": 65.62019062042236,
+    "status": "success",
+    "warnings": [
+      "Exact page numbers for equations were not available in the extracted XML.",
+      "Some unit annotations (e.g., pOMD in g/d vs g/kg) inconsistency in the original text need to be double checked.",
+      "No explicit confidence intervals were reported beyond standard errors for regression parameters."
+    ],
+    "input_file": "XML_chunker\\Benchmark chunked outputs\\select6\\10.3168_jds.2021-20806_general_dairy_results.json",
+    "timestamp_utc": "2025-12-05T00:27:49.018338+00:00"
+  }
+}
