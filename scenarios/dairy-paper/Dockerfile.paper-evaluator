@@ -1,22 +1,20 @@
-FROM ghcr.io/astral-sh/uv:python3.12-trixie-slim
+FROM ghcr.io/astral-sh/uv:python3.12-trixie
 
-RUN adduser --disabled-password agentbeats
+RUN adduser agentbeats
 USER agentbeats
 WORKDIR /home/agentbeats/paper-extractor
 
-# Copy dependency files first for better layer caching
-COPY --chown=agentbeats pyproject.toml uv.lock README.md ./
-
-# Install all dependencies including evaluator extras (bert-score)
-RUN \
-    --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
-    UV_LINK_MODE=copy uv sync --locked --no-dev --group evaluator
+COPY pyproject.toml uv.lock README.md ./
 
 # Copy src directory for agentbeats module (needed for green_executor, models, tool_provider)
-COPY --chown=agentbeats src src
+COPY src src
+
+RUN \
+    --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
+    UV_LINK_MODE=copy uv sync --locked
 
 # Copy scenarios directory (includes helpers.py, data files, templates, and evaluator script)
-COPY --chown=agentbeats scenarios scenarios
+COPY scenarios scenarios
 
 ENTRYPOINT ["uv", "run", "scenarios/dairy-paper/paper_evaluator.py"]
 CMD ["--host", "0.0.0.0"]

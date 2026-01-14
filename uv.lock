@@ -34,6 +34,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "a2a-sdk" },
+    { name = "bert-score" },
     { name = "litellm" },
     { name = "loguru" },
     { name = "nest-asyncio" },
@@ -46,13 +47,11 @@ dependencies = [
 dev = [
     { name = "mypy" },
 ]
-evaluator = [
-    { name = "bert-score" },
-]
 
 [package.metadata]
 requires-dist = [
     { name = "a2a-sdk", specifier = ">=0.3.5" },
+    { name = "bert-score", specifier = ">=0.3.13" },
     { name = "litellm", specifier = ">=1.0.0" },
     { name = "loguru", specifier = ">=0.7.0" },
     { name = "nest-asyncio", specifier = ">=1.6.0" },
@@ -63,7 +62,6 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [{ name = "mypy", specifier = ">=1.18.1" }]
-evaluator = [{ name = "bert-score", specifier = ">=0.3.13" }]
 
 [[package]]
 name = "aiohappyeyeballs"
