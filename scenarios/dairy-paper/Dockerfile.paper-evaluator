@@ -7,7 +7,15 @@ WORKDIR /home/agentbeats/paper-extractor
 # Copy dependency files first for better layer caching
 COPY --chown=agentbeats pyproject.toml uv.lock README.md ./
 
+# Install CPU-only PyTorch first to avoid CUDA dependencies (~2.4GB savings)
+# This prevents bert-score from pulling in CUDA-enabled torch
+# Install into the system Python (uv will use this when it syncs)
+RUN \
+    --mount=type=cache,target=/home/agentbeats/.cache/pip,uid=1000 \
+    python -m pip install --user torch --index-url https://download.pytorch.org/whl/cpu
+
 # Install all dependencies including evaluator extras (bert-score)
+# bert-score will detect and use the already-installed CPU torch
 RUN \
     --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
     UV_LINK_MODE=copy uv sync --locked --no-dev --group evaluator
