@@ -43,12 +43,6 @@ cd agentbeats-paper-extractor
 uv sync
 ```
 
-**Note:** If you see a warning about hardlinking files (common on Windows when cache and target are on different filesystems), you can suppress it by setting:
-```powershell
-$env:UV_LINK_MODE="copy"
-```
-Or use the flag: `uv sync --link-mode=copy`
-
 3. Set up environment variables:
 ```bash
 cp sample.env .env
