@@ -5,7 +5,7 @@ USER agentbeats
 WORKDIR /home/agentbeats/paper-extractor
 
 # Copy dependency files first for better layer caching
-COPY --chown=agentbeats pyproject.toml uv.lock ./
+COPY --chown=agentbeats pyproject.toml uv.lock README.md ./
 
 # Install only core dependencies (exclude bert-score which pulls in torch)
 RUN \
