@@ -11,7 +11,7 @@ COPY src src
 
 RUN \
     --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
-    UV_LINK_MODE=copy uv sync --locked
+    UV_LINK_MODE=copy uv sync --locked --no-dev --group evaluator
 
 # Copy scenarios directory (includes helpers.py, data files, templates, and evaluator script)
 COPY scenarios scenarios
