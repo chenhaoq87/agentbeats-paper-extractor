@@ -1,5 +1,7 @@
 FROM ghcr.io/astral-sh/uv:python3.12-trixie
 
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
 RUN adduser agentbeats
 USER agentbeats
 WORKDIR /home/agentbeats/paper-extractor
