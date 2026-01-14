@@ -7,22 +7,18 @@ WORKDIR /home/agentbeats/paper-extractor
 # Copy dependency files first for better layer caching
 COPY --chown=agentbeats pyproject.toml uv.lock README.md ./
 
-# Install all dependencies including evaluator extras (this will install CUDA torch from lock file)
+# Install CPU-only PyTorch first to avoid CUDA dependencies (~2.4GB savings)
+# This prevents bert-score from pulling in CUDA-enabled torch
+# Install into the system Python (uv will use this when it syncs)
+RUN \
+    --mount=type=cache,target=/home/agentbeats/.cache/pip,uid=1000 \
+    python -m pip install --user torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install all dependencies including evaluator extras (bert-score)
+# bert-score will detect and use the already-installed CPU torch
 RUN \
     --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
     UV_LINK_MODE=copy uv sync --locked --no-dev --group evaluator
-
-# Replace CUDA torch with CPU-only version to save ~2.4GB
-# Uninstall CUDA torch and all NVIDIA CUDA packages
-RUN \
-    --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
-    uv pip uninstall -y torch torchvision torchaudio || true && \
-    uv pip uninstall -y nvidia-cublas-cu12 nvidia-cudnn-cu12 nvidia-cufft-cu12 nvidia-curand-cu12 nvidia-cusolver-cu12 nvidia-cusparse-cu12 nvidia-cusparselt-cu12 nvidia-nccl-cu12 nvidia-nvjitlink-cu12 nvidia-nvshmem-cu12 nvidia-nvtx-cu12 nvidia-cuda-cupti-cu12 nvidia-cuda-nvrtc-cu12 nvidia-cuda-runtime-cu12 nvidia-cufile-cu12 || true
-
-# Install CPU-only PyTorch
-RUN \
-    --mount=type=cache,target=/home/agentbeats/.cache/uv,uid=1000 \
-    uv pip install torch --index-url https://download.pytorch.org/whl/cpu
 
 # Copy src directory for agentbeats module (needed for green_executor, models, tool_provider)
 COPY --chown=agentbeats src src
