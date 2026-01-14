@@ -4,3 +4,16 @@
 .venv
 **/__pycache__
 **/*.pyc
+*.pyo
+*.pyd
+.git/
+*.md
+tests/
+.pytest_cache/
+.coverage
+*.log
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
