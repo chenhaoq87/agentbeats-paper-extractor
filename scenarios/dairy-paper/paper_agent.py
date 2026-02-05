@@ -82,7 +82,7 @@ class PaperAgentExecutor(AgentExecutor):
             response = completion(
                 messages=messages,
                 model=self.model,
-                temperature=1.0,
+                temperature=0.0,
                 response_format={"type": "json_object"},
                 api_key=os.getenv("OPENAI_API_KEY"),
             )
